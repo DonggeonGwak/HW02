@@ -43,20 +43,11 @@ public:
 };
 
 int main() {
-    // Animal 타입 포인터로 다양한 객체를 가리킴
-    Animal* myAnimal[3] = {};
+        
     Dog myDog;
     Cat myCat;
     Cow myCow;
-
-    // Dog 객체 가리키기
-    myAnimal[0] = &myDog;
-    
-    // Cat 객체 가리키기
-    myAnimal[1] = &myCat;
-    
-    // Cow 객체 가리키기
-    myAnimal[2] = &myCow;
+    Animal* myAnimal[3] = { &myDog, &myCat, &myCow};
     
     for (int i = 0; i < 3; i++)
     {
