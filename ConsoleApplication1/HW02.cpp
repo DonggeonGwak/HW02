@@ -8,51 +8,52 @@
 - Animal 배열을 반복문으로 순회하면서 각 동물의 울음소리를 내게 합니다.
 */
 
+#include "animal.h"
+#include "zoo.h"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
-// 기본 클래스: Animal
-class Animal {
-public:
-    // 가상 함수: 자식 클래스에서 재정의 가능
-    virtual void makeSound() = 0;
-};
+Animal* createRandomAnimal() 
+{
+	
+	int randInt = rand() % 3; // 0, 1, 2 중 하나의 난수 생성
 
-// 파생 클래스: Dog
-class Dog : public Animal {
-public:
-    void makeSound() {
-        cout << "강아지 울음 소리: 멍! 멍!" << endl;
-    }
-};
+	if (randInt == 0)
+	{
+		return new Dog(); // Dog 객체 생성
+	}
+	else if (randInt == 1)
+	{
+		return new Cat(); // Cat 객체 생성
+	}
+	else
+	{
+		return new Cow(); // Cow 객체 생성
+	}
+}
 
-// 파생 클래스: Cat
-class Cat : public Animal {
-public:
-    void makeSound() {
-        cout << "고양이 울음 소리: 냐옹! 냐옹!" << endl;
-    }
-};
+int main()
+{	
+	srand(time(0)); // 난수 생성 초기화
 
-// 파생 클래스: Cow
-class Cow : public Animal {
-public:
-    void makeSound() {
-        cout << "소 울음 소리: 음메! 음메!" << endl;
-    }
-};
+	const int SIZE = 3;
+	Animal* animals[SIZE] = {};
 
-int main() {
-        
-    Dog myDog;
-    Cat myCat;
-    Cow myCow;
-    Animal* myAnimal[3] = { &myDog, &myCat, &myCow};
-    
-    for (int i = 0; i < 3; i++)
-    {
-        myAnimal[i]->makeSound();  // i 번째의 makeSound() 호출
-    }
-        
-    return 0;
+	Dog mydog;
+	Cat mycat;
+	Cow mycow;
+		
+	Zoo myZoo;
+
+	myZoo.addAnimal(createRandomAnimal());
+	myZoo.addAnimal(createRandomAnimal());
+	myZoo.addAnimal(createRandomAnimal());
+	
+	myZoo.performActions();
+
+	
+	return 0;
 }
